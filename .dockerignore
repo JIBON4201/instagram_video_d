@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+*.log
+.env
+.env.*
+cookies.txt
+*.cookies.txt
+test
+docs
+README.md
+render.yaml

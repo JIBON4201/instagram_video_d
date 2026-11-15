@@ -1,0 +1,37 @@
+{
+  "name": "reel-downloader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted Instagram reel downloader with a paste-and-go web UI.",
+  "author": "Shakeel Ahmed",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shakeel5692/reel-downloader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shakeel5692/reel-downloader/issues"
+  },
+  "homepage": "https://github.com/Shakeel5692/reel-downloader#readme",
+  "type": "module",
+  "main": "server.js",
+  "bin": {
+    "reel-downloader": "./cli.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check cli.js && node --check lib/env.js && node --check lib/ytdlp.js && node --check lib/instagram.js && node --check lib/download.js && node --check public/app.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "instagram",
+    "reels",
+    "downloader",
+    "yt-dlp",
+    "video"
+  ],
+  "license": "MIT"
+}
