@@ -683,7 +683,7 @@ async function route(req, res) {
   if (pathname === '/sitemap.xml' && req.method === 'GET') {
     const proto = req.headers['x-forwarded-proto'] || 'http';
     const host = req.headers.host || 'localhost:3000';
-    const siteUrl = `${proto}://${host}`;
+    const siteUrl = process.env.SITE_URL || `${proto}://${host}`;
     const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>`;
     return sendText(res, 200, xml, 'application/xml');
   }
