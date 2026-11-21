@@ -19,12 +19,12 @@ import { ytdlpVersion } from './lib/ytdlp.js';
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
-const MAX_CONCURRENT = Math.max(1, Number(process.env.MAX_CONCURRENT) || 2);
-const MAX_QUEUED = Math.max(1, Number(process.env.MAX_QUEUED) || 40);
+const MAX_CONCURRENT = Math.max(1, Number(process.env.MAX_CONCURRENT) || 1);
+const MAX_QUEUED = Math.max(1, Number(process.env.MAX_QUEUED) || 20);
 const JOB_TTL_MS = Math.max(5, Number(process.env.JOB_TTL_MIN) || 30) * 60_000;
 const RESOLVE_TTL_MS = Math.max(2, Number(process.env.RESOLVE_TTL_MIN) || 10) * 60_000;
 const MAX_BODY_BYTES = 32 * 1024;
-const MAX_CACHE_ENTRIES = 200;
+const MAX_CACHE_ENTRIES = 100;
 const TMP_ROOT = process.env.TMP_DIR || path.join(os.tmpdir(), 'reel-downloader');
 const PUBLIC_DIR = fileURLToPath(new URL('./public', import.meta.url));
 
@@ -170,15 +170,15 @@ async function fetchThumbnail(url) {
         referer: 'https://www.instagram.com/',
         accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
       },
-      signal: AbortSignal.timeout(8_000),
+      signal: AbortSignal.timeout(5_000),
     });
     if (!response.ok) return null;
     const type = (response.headers.get('content-type') || '').split(';')[0].trim();
     if (!type.startsWith('image/')) return null;
     const length = Number(response.headers.get('content-length') || 0);
-    if (length > 8 * 1024 * 1024) return null;
+    if (length > 2 * 1024 * 1024) return null;
     const buffer = Buffer.from(await response.arrayBuffer());
-    if (!buffer.length || buffer.length > 8 * 1024 * 1024) return null;
+    if (!buffer.length || buffer.length > 2 * 1024 * 1024) return null;
     return { buffer, type };
   } catch {
     return null;
@@ -322,6 +322,7 @@ async function runJob(job) {
       quality: job.quality,
       dir: job.dir,
       signal: job.controller.signal,
+      preferProgressive: Boolean(job.reel?.hasProgressive),
       onProgress: (update) => {
         if (job.cancelled) return;
         if (update.stage) job.stage = update.stage;
