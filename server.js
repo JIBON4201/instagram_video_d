@@ -687,7 +687,8 @@ async function route(req, res) {
     const proto = req.headers['x-forwarded-proto'] || 'http';
     const host = req.headers.host || 'localhost:3000';
     const siteUrl = process.env.SITE_URL || `${proto}://${host}`;
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>`;
+    const pages = ['', '/about.html', '/contact.html', '/privacy.html', '/terms.html', '/copyright.html'];
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(p => `  <url>\n    <loc>${siteUrl}${p}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>${p === '' ? '1.0' : '0.5'}</priority>\n  </url>`).join('\n')}\n</urlset>`;
     return sendText(res, 200, xml, 'application/xml');
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {

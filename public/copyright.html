@@ -4,7 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#08080d" />
+    <meta name="description" content="Copyright &amp; Content Removal Policy — Reel Downloader. Submit DMCA-style removal requests for content accessed through the Instagram reel downloader." />
+    <meta property="og:title" content="Copyright / Content Removal — Reel Downloader" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Copyright &amp; Content Removal Policy — Reel Downloader." />
+    <meta name="twitter:title" content="Copyright / Content Removal — Reel Downloader" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:description" content="Copyright &amp; Content Removal Policy — Reel Downloader." />
     <title>Copyright / Content Removal — Reel Downloader</title>
+    <link rel="canonical" href="" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
@@ -63,5 +72,13 @@
         <a href="/terms.html">Terms of Service</a>
       </p>
     </footer>
+    <script>
+      (function () {
+        var base = window.location.origin;
+        document.querySelectorAll('meta[property="og:url"], meta[name="twitter:url"], link[rel="canonical"]').forEach(function (el) {
+          el.setAttribute(el.tagName === 'LINK' ? 'href' : 'content', base);
+        });
+      })();
+    </script>
   </body>
 </html>
