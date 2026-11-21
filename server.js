@@ -678,7 +678,10 @@ async function route(req, res) {
     throw new AppError(404, 'Not found.');
   }
   if (pathname === '/robots.txt' && req.method === 'GET') {
-    return sendText(res, 200, 'User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /public/\nSitemap: /sitemap.xml\n', 'text/plain');
+    const proto = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers.host || 'localhost:3000';
+    const siteUrl = process.env.SITE_URL || `${proto}://${host}`;
+    return sendText(res, 200, `User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /public/\nSitemap: ${siteUrl}/sitemap.xml\n`, 'text/plain');
   }
   if (pathname === '/sitemap.xml' && req.method === 'GET') {
     const proto = req.headers['x-forwarded-proto'] || 'http';
