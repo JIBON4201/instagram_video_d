@@ -282,6 +282,15 @@ h1 {
   animation: fade-up 0.7s 0.12s ease both;
 }
 
+.unofficial-note {
+  max-width: 600px;
+  margin: 8px auto 0;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.6;
+  animation: fade-up 0.7s 0.12s ease both;
+}
+
 /* ---------- Search ---------- */
 
 .search {
