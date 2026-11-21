@@ -375,6 +375,11 @@ async function runJob(job) {
         status: job.status,
         message: error?.message,
         stack: error?.stack,
+        stderr: error?.stderr,
+        stdout: error?.stdout,
+        code: error?.code,
+        signal: error?.signal,
+        cmd: error?.cmd,
       });
       await removeJobDir(job);
     }

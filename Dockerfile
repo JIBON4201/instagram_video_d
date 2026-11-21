@@ -8,7 +8,8 @@ ENV NODE_ENV=production \
 RUN apt-get update \
     && apt-get install -y --no-install-recommends python3 python3-pip ffmpeg ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install --no-cache-dir --break-system-packages yt-dlp
+    && pip install --no-cache-dir --break-system-packages yt-dlp \
+    && which ffmpeg && which ffprobe
 
 WORKDIR /app
 
