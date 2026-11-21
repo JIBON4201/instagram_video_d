@@ -1,6 +1,37 @@
 const RECENT_KEY = 'reel-downloader:recent-v1';
 const POLL_INTERVAL = 850;
 
+function initSeo() {
+  const siteUrl = window.location.origin;
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = siteUrl + '/';
+
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.content = siteUrl;
+  const twitterUrl = document.querySelector('meta[name="twitter:url"]');
+  if (twitterUrl) twitterUrl.content = siteUrl;
+
+  const jsonLdScripts = document.querySelectorAll('script[type="application/ld+json"]');
+  jsonLdScripts.forEach((script) => {
+    try {
+      const data = JSON.parse(script.textContent);
+      if (data['@type'] === 'WebApplication' && data.url === '') {
+        data.url = siteUrl + '/';
+        script.textContent = JSON.stringify(data);
+      }
+    } catch {
+      /* ignore malformed JSON-LD */
+    }
+  });
+}
+
+initSeo();
+
 const $ = (id) => document.getElementById(id);
 
 const el = {
@@ -171,11 +202,7 @@ function setFetchBusy(busy) {
 }
 
 function resetDownloadPanels() {
-  const previousJob = state.jobId;
   stopPolling();
-  if (previousJob) {
-    api(`/api/jobs/${previousJob}`, { method: 'DELETE' }).catch(() => {});
-  }
   state.jobId = null;
   state.downloading = false;
   el.progressPanel.hidden = true;
@@ -299,6 +326,8 @@ function renderReel(reel) {
   requestAnimationFrame(() => scrollTo(el.preview));
 }
 
+const INSTAGRAM_URL_PATTERN = /https?:\/\/(www\.)?(m\.|l\.)?instagram\.com\/(reel|reels|p|tv|share)\/[A-Za-z0-9_-]+\/?/;
+
 async function resolveReel(rawUrl) {
   const value = String(rawUrl || '').trim();
   if (!value) {
@@ -307,6 +336,13 @@ async function resolveReel(rawUrl) {
     return;
   }
   if (state.resolving) return;
+
+  // Client-side validation for immediate feedback on obviously invalid URLs
+  if (!INSTAGRAM_URL_PATTERN.test(value) && !value.includes('instagram.com/')) {
+    showError('Invalid URL', 'Please paste a valid Instagram reel, post, or share link.');
+    el.url.focus();
+    return;
+  }
 
   resetDownloadPanels();
   el.preview.hidden = true;

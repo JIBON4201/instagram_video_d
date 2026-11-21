@@ -28,6 +28,11 @@ const MAX_CACHE_ENTRIES = 200;
 const TMP_ROOT = process.env.TMP_DIR || path.join(os.tmpdir(), 'reel-downloader');
 const PUBLIC_DIR = fileURLToPath(new URL('./public', import.meta.url));
 
+const RATE_LIMIT_RESOLVE = Math.max(1, Number(process.env.RATE_LIMIT_RESOLVE) || 60);
+const RATE_LIMIT_DOWNLOAD = Math.max(1, Number(process.env.RATE_LIMIT_DOWNLOAD) || 8);
+const RATE_LIMIT_WINDOW_MS = Math.max(1000, Number(process.env.RATE_LIMIT_WINDOW_MS) || 60_000);
+const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
+
 const jobs = new Map();
 const queue = [];
 const resolveCache = new Map();
@@ -51,12 +56,38 @@ const MIME_TYPES = {
 const USER_AGENT =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36';
 
-function sendJson(res, status, payload) {
+function log(level, message, meta = {}) {
+  const entry = {
+    level,
+    message,
+    timestamp: new Date().toISOString(),
+    pid: process.pid,
+    ...meta,
+  };
+  const line = JSON.stringify(entry);
+  if (level === 'error') {
+    console.error(line);
+  } else {
+    console.log(line);
+  }
+}
+
+function sendJson(res, status, payload, extraHeaders = {}) {
   const body = JSON.stringify(payload);
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Content-Length': Buffer.byteLength(body),
     'Cache-Control': 'no-store',
+    ...extraHeaders,
+  });
+  res.end(body);
+}
+
+function sendText(res, status, body, contentType) {
+  res.writeHead(status, {
+    'Content-Type': `${contentType}; charset=utf-8`,
+    'Content-Length': Buffer.byteLength(body),
+    'Cache-Control': 'public, max-age=86400',
   });
   res.end(body);
 }
@@ -98,9 +129,12 @@ function allowRequest(req, name, limit, windowMs) {
     rateBuckets.set(key, bucket);
   }
   bucket.count += 1;
+  const remaining = Math.max(0, limit - bucket.count);
+  const resetAt = bucket.resetAt;
   if (bucket.count > limit) {
-    throw new AppError(429, 'Too many requests. Please wait a moment and try again.');
+    throw new AppError(429, 'Too many requests. Please wait a moment and try again.', { rateLimit: { limit, remaining, resetAt } });
   }
+  return { limit, remaining, resetAt };
 }
 
 function cacheResolvedReel(reel) {
@@ -177,13 +211,17 @@ function publicReel(info, resolveId, thumbnail) {
 }
 
 async function handleResolve(req, res) {
-  allowRequest(req, 'resolve', 60, 60_000);
+  const rateInfo = allowRequest(req, 'resolve', RATE_LIMIT_RESOLVE, RATE_LIMIT_WINDOW_MS);
   const body = await readJson(req);
   const sourceUrl = normalizeReelUrl(body.url);
 
   const cached = cachedReel(sourceUrl);
   if (cached) {
-    return sendJson(res, 200, { reel: cached, cached: true });
+    return sendJson(res, 200, { reel: cached, cached: true }, {
+      'X-RateLimit-Limit': String(rateInfo.limit),
+      'X-RateLimit-Remaining': String(rateInfo.remaining),
+      'X-RateLimit-Reset': String(Math.ceil(rateInfo.resetAt / 1000)),
+    });
   }
 
   const info = await extractReel(sourceUrl);
@@ -205,7 +243,11 @@ async function handleResolve(req, res) {
 
   const reel = publicReel({ ...info, resolveId }, resolveId, thumbnail);
   cacheResolvedReel(reel);
-  return sendJson(res, 200, { reel, cached: false });
+  return sendJson(res, 200, { reel, cached: false }, {
+    'X-RateLimit-Limit': String(rateInfo.limit),
+    'X-RateLimit-Remaining': String(rateInfo.remaining),
+    'X-RateLimit-Reset': String(Math.ceil(rateInfo.resetAt / 1000)),
+  });
 }
 
 function safeFilenamePart(value, fallback) {
@@ -328,7 +370,12 @@ async function runJob(job) {
       job.stage = 'Could not download this reel';
       job.error = publicDownloadError(error);
       job.expiresAt = Date.now() + JOB_TTL_MS;
-      console.error(`[job ${job.id}]`, error?.stack || error);
+      log('error', 'job failed', {
+        jobId: job.id,
+        status: job.status,
+        message: error?.message,
+        stack: error?.stack,
+      });
       await removeJobDir(job);
     }
   }
@@ -340,7 +387,11 @@ function pump() {
     if (job.status !== 'queued') continue;
     activeJobs += 1;
     runJob(job)
-      .catch((error) => console.error(`[job ${job.id}] unexpected`, error))
+      .catch((error) => log('error', 'job unexpected', {
+        jobId: job.id,
+        message: error?.message,
+        stack: error?.stack,
+      }))
       .finally(() => {
         activeJobs -= 1;
         pump();
@@ -349,7 +400,7 @@ function pump() {
 }
 
 async function handleDownload(req, res) {
-  allowRequest(req, 'download', 8, 60_000);
+  const rateInfo = allowRequest(req, 'download', RATE_LIMIT_DOWNLOAD, RATE_LIMIT_WINDOW_MS);
   const body = await readJson(req);
   const sourceUrl = normalizeReelUrl(body.url);
   const quality = body.quality || 'best';
@@ -358,7 +409,9 @@ async function handleDownload(req, res) {
     throw new AppError(400, 'Unknown quality option.');
   }
   if (queue.length >= MAX_QUEUED) {
-    throw new AppError(429, 'The download queue is full. Please try again in a minute.');
+    throw new AppError(429, 'The download queue is full. Please try again in a minute.', {
+      rateLimit: { limit: RATE_LIMIT_DOWNLOAD, remaining: 0, resetAt: Date.now() + RATE_LIMIT_WINDOW_MS },
+    });
   }
 
   const id = crypto.randomUUID();
@@ -386,7 +439,11 @@ async function handleDownload(req, res) {
   queue.push(job);
   pump();
 
-  return sendJson(res, 202, { jobId: id, status: job.status });
+  return sendJson(res, 202, { jobId: id, status: job.status }, {
+    'X-RateLimit-Limit': String(rateInfo.limit),
+    'X-RateLimit-Remaining': String(rateInfo.remaining),
+    'X-RateLimit-Reset': String(Math.ceil(rateInfo.resetAt / 1000)),
+  });
 }
 
 function handleGetJob(req, res, id) {
@@ -554,16 +611,25 @@ async function handleHealth(req, res) {
 
 async function route(req, res) {
   const started = Date.now();
+  const requestId = crypto.randomUUID();
+  res.setHeader('X-Request-Id', requestId);
   res.on('finish', () => {
     if (req.url === '/api/health') return;
     const safeUrl = String(req.url || '').split('?')[0];
-    console.log(`${req.method} ${safeUrl} ${res.statusCode} ${Date.now() - started}ms`);
+    log('info', 'request', {
+      requestId,
+      method: req.method,
+      url: safeUrl,
+      status: res.statusCode,
+      durationMs: Date.now() - started,
+    });
   });
 
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('Referrer-Policy', 'no-referrer');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   res.setHeader(
     'Content-Security-Policy',
     "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; media-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
@@ -605,6 +671,13 @@ async function route(req, res) {
   if (parts[0] === 'api') {
     throw new AppError(404, 'Not found.');
   }
+  if (pathname === '/robots.txt' && req.method === 'GET') {
+    return sendText(res, 200, 'User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /public/\nSitemap: /sitemap.xml\n', 'text/plain');
+  }
+  if (pathname === '/sitemap.xml' && req.method === 'GET') {
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>`;
+    return sendText(res, 200, xml, 'application/xml');
+  }
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     throw new AppError(405, 'Method not allowed.');
   }
@@ -617,17 +690,39 @@ const server = http.createServer(async (req, res) => {
     await route(req, res);
   } catch (error) {
     const status = error instanceof AppError ? error.status : 500;
-    if (status >= 500) console.error(error?.stack || error);
+    const requestId = res.getHeader('X-Request-Id') || 'unknown';
+    if (status >= 500) {
+      log('error', 'server error', {
+        requestId,
+        status,
+        message: error?.message,
+        stack: error?.stack,
+      });
+    } else if (status >= 400) {
+      log('warn', 'client error', {
+        requestId,
+        status,
+        message: error?.message,
+      });
+    }
     if (res.headersSent) {
       res.end();
       return;
+    }
+    const extraHeaders = {};
+    if (error instanceof AppError && error.metadata?.rateLimit) {
+      const rl = error.metadata.rateLimit;
+      extraHeaders['X-RateLimit-Limit'] = String(rl.limit);
+      extraHeaders['X-RateLimit-Remaining'] = String(rl.remaining);
+      extraHeaders['X-RateLimit-Reset'] = String(Math.ceil(rl.resetAt / 1000));
+      extraHeaders['Retry-After'] = String(Math.ceil((rl.resetAt - Date.now()) / 1000));
     }
     sendJson(res, status, {
       error:
         error instanceof AppError
           ? error.message
           : 'Something went wrong on the server. Please try again.',
-    });
+    }, extraHeaders);
   }
 });
 
@@ -636,9 +731,13 @@ function cleanup() {
   for (const [id, job] of jobs) {
     const expired =
       (job.status === 'ready' && job.expiresAt && job.expiresAt <= now) ||
-      (['error', 'cancelled'].includes(job.status) && job.expiresAt && job.expiresAt <= now);
+      (['error', 'cancelled'].includes(job.status) && job.expiresAt && job.expiresAt <= now) ||
+      (['queued', 'resolving', 'downloading'].includes(job.status) && job.expiresAt && job.expiresAt <= now);
     if (expired) {
       jobs.delete(id);
+      if (job.controller && !job.controller.signal.aborted) {
+        job.controller.abort();
+      }
       removeJobDir(job);
     }
   }
