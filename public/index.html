@@ -3,465 +3,268 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#08080d" />
-    <meta name="google-site-verification" content="QfzN85dDxujMvT4FxRAQWqVI3XiGXBwHvLu7Js6pkB8" />
-    <meta
-      name="description"
-      content="Free Instagram reel downloader — download Instagram reels, videos, and photos online without watermark. Paste a public Instagram link, choose HD/4K quality, and save MP4. No login required."
-    />
-    <meta name="keywords" content="instagram reel downloader, download instagram reels, instagram video downloader, save instagram reels, instagram reels mp4 downloader, instagram photo downloader, instagram image downloader, instagram downloader, instagram profile picture downloader, downloading instagram reels, instagram reel downloader free, instagram reels downloader website, instagram reels video downloader, instagram reel downloader online, instagram reel thumbnail downloader, instagram reel downloader no watermark, instagram reel downloader hd, instagram reels downloader without watermark, instagram reels downloader shortcut, download reels, download instagram reels and videos, download instagram reels video free" />
-    <meta property="og:title" content="Instagram Reels Downloader — Save Reels Online Free" />
-    <meta
-      property="og:description"
-      content="Free Instagram reel downloader — download Instagram reels, videos, and photos online without watermark. Paste a public Instagram link, choose HD/4K quality, and save MP4. No login required."
-    />
+    <meta name="theme-color" content="#080812" />
+    <title>Instagram Reel Downloader - Download Instagram Videos, Reels &amp; Photos Free</title>
+    <meta name="description" content="Free Instagram video downloader. Download Instagram reels, videos, photos, IGTV, profile pictures and stories in HD and 4K quality. No login, no watermark, online and fast." />
+    <meta name="keywords" content="download video from instagram, instagram video downloader, snapinsta instagram video download, how do you download video from instagram, instagram video download 4k, how can i download instagram videos, instagram photo downloader, snapinsta instagram video downloader, instagram image downloader, instagram downloader, instagram profile picture downloader, downloading videos on instagram, snapinsta instagram reels downloader, instagram reel downloads, instagram reels downloaded, instagram reel downloader free, downloading instagram reels, instagram reels downloader website, instagram reels video downloader, instagram reel downloader online, instagram reel thumbnail downloader, instagram reel downloader no watermark, instagram reel downloader 4k, instagram reels downloader without watermark, instagram reel downloader hd without watermark, instagram reels mp3 downloader, download reels, download instagram reels and videos, download instagram reels video free, download private instagram reel video" />
+    <meta property="og:title" content="Instagram Reel Downloader - Download Instagram Videos, Reels &amp; Photos Free" />
+    <meta property="og:description" content="Free Instagram video downloader. Download Instagram reels, videos, photos, IGTV, profile pictures and stories in HD and 4K quality. No login, no watermark, online and fast." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="" />
-    <meta property="og:site_name" content="Reel Downloader" />
-    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:image" content="/logo.svg" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:site_name" content="Instagram Reel Downloader" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Instagram Reels Downloader — Save Reels Online Free" />
-    <meta name="twitter:description" content="Free Instagram reel downloader — download Instagram reels, videos, and photos online without watermark. Paste a public Instagram link, choose HD/4K quality, and save MP4. No login required." />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:image" content="/favicon.svg" />
-    <title>Instagram Reels Downloader — Save Reels Online Free</title>
+    <meta name="twitter:title" content="Instagram Reel Downloader - Download Instagram Videos, Reels &amp; Photos Free" />
+    <meta name="twitter:description" content="Free Instagram video downloader. Download Instagram reels, videos, photos, IGTV, profile pictures and stories in HD and 4K quality. No login, no watermark, online and fast." />
+    <meta name="twitter:image" content="/logo.svg" />
     <link rel="canonical" href="" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <div class="backdrop" aria-hidden="true">
-      <span class="orb orb-one"></span>
-      <span class="orb orb-two"></span>
-      <span class="orb orb-three"></span>
-      <span class="grid"></span>
-    </div>
-
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Reel Downloader home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 4v10m0 0-4-4m4 4-4-4M5 19h14" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </span>
-        <span class="brand-text">Reel <span>Downloader</span></span>
-      </a>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="eyebrow"><span class="dot"></span> No login · No watermark · Free</div>
-        <h1>
-          Save Instagram reels<br />
-          <span class="gradient-text">in original quality.</span>
-        </h1>
-        <p class="subhead">
-          Paste a reel link, pick the quality, and get a clean MP4. Your own
-          self-hosted downloader — no sketchy ads, no redirects.
-        </p>
-
-        <p class="unofficial-note">
-          Independent, unofficial tool — not affiliated with or endorsed by
-          Instagram or Meta. Instagram is a trademark of Meta Platforms, Inc.
-        </p>
-
-        <form id="url-form" class="search" novalidate>
-          <div class="search-field">
-            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M10.5 18a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15Zm5.5-1.9L21 21"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
-            </svg>
-            <input
-              id="url"
-              name="url"
-              type="text"
-              inputmode="url"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck="false"
-              placeholder="https://www.instagram.com/reel/…"
-              aria-label="Instagram reel link"
-            />
-            <button id="paste" class="icon-button" type="button" title="Paste from clipboard">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M9 4.5h6M9 4.5A2.5 2.5 0 0 0 6.5 7v12A2.5 2.5 0 0 0 9 21.5h6a2.5 2.5 0 0 0 2.5-2.5V7A2.5 2.5 0 0 0 15 4.5M9 4.5V3.9c0-.77.63-1.4 1.4-1.4h3.2c.77 0 1.4.63 1.4 1.4v.6"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
-              <span class="sr-only">Paste from clipboard</span>
-            </button>
-          </div>
-          <button id="fetch" class="button primary" type="submit">
-            <span class="button-label">Fetch reel</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </form>
-
-        <p class="search-hint">
-          Works with <code>instagram.com/reel</code>, <code>/p</code> and
-          <code>/tv</code> links
-        </p>
-      </section>
-
-      <section class="seo-content" aria-label="Instagram downloader guide">
-        <div class="container">
-          <h2>Free Instagram Video Downloader — Download Reels, Videos &amp; Photos Online</h2>
-          <p>
-            Looking for the best way to <strong>download video from Instagram</strong>? Reel Downloader is a
-            free, self-hosted Instagram reel downloader that lets you save public reels, videos, and photos in
-            seconds. Just paste an Instagram link, pick your quality, and download a clean MP4 — no login, no
-            watermark, and no sketchy ads.
-          </p>
-
-          <h3>Instagram Reel Downloader — No Watermark, No Login</h3>
-          <p>
-            Our <strong>Instagram reel downloader</strong> works entirely in your browser and on your own server.
-            Whether you want an <strong>Instagram video download 4k</strong> option or a data-saver MP4, we
-            extract the highest available quality and convert it to universally playable H.264. It's the
-            <strong>Instagram reel downloader free</strong> alternative to ad-heavy sites like snapinsta.
-          </p>
-
-          <h3>How to Download Instagram Reels and Videos</h3>
-          <ol>
-            <li>Copy any public Instagram reel, <code>/p</code> post, or <code>/tv</code> link.</li>
-            <li>Paste the link into the search box above and tap <strong>Fetch reel</strong>.</li>
-            <li>Choose a quality — best (H.264), original (remux), or data saver (progressive MP4).</li>
-            <li>Tap <strong>Download video</strong> and save the MP4 to your device.</li>
-          </ol>
-
-          <h3>Instagram Photo Downloader &amp; Image Downloader</h3>
-          <p>
-            Not just video — Reel Downloader also works as an <strong>Instagram photo downloader</strong> and
-            <strong>Instagram image downloader</strong>. Carousel posts and single photos are extracted with the
-            same no-login flow, so you can save Instagram images in original resolution.
-          </p>
-
-          <h3>Instagram Profile Picture Downloader</h3>
-          <p>
-            Need an <strong>Instagram profile picture downloader</strong>? Paste a profile URL and grab the
-            full-resolution profile photo without watermark or login.
-          </p>
-
-          <h3>Why Choose Reel Downloader Over Snapinsta?</h3>
-          <p>
-            Unlike <strong>snapinsta instagram video downloader</strong> and other third-party sites, Reel
-            Downloader is self-hosted: nothing is stored permanently, files are deleted automatically after 30
-            minutes, and there are no pop-ups or redirects. It's a <strong>snapinsta instagram reels downloader</strong>
-            alternative built for privacy and speed.
-          </p>
-
-          <p>
-            Only download content you own or have permission to use. Reel Downloader is not affiliated with
-            Instagram or Meta. Private and restricted reels are not supported.
-          </p>
-        </div>
-      </section>
-
-      <section id="preview" class="panel preview" hidden aria-live="polite">
-        <div class="thumb">
-          <img id="thumb-image" alt="" referrerpolicy="no-referrer" />
-          <div id="thumb-fallback" class="thumb-fallback" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M8.5 6.5h7A2.5 2.5 0 0 1 18 9v7.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 16.5V9a2.5 2.5 0 0 1 2.5-2.5Zm0 0V4m4.75 7.6v4.3c0 .6.66.98 1.17.65l3.3-2.15a.78.78 0 0 0 0-1.3l-3.3-2.15a.78.78 0 0 0-1.17.65Z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                stroke-linecap="round"
-              />
-            </svg>
-            <span>Instagram reel</span>
-          </div>
-          <span id="duration-chip" class="duration-chip" hidden></span>
-        </div>
-
-        <div class="preview-body">
-          <div class="preview-head">
-            <div class="author">
-              <span id="avatar" class="avatar">R</span>
-              <span class="author-text">
-                <strong id="author-name">Instagram creator</strong>
-                <span id="author-handle">@instagram</span>
-              </span>
-            </div>
-            <a
-              id="original-link"
-              class="mini-link"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open on Instagram
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M14 5h5v5M19 5l-8 8M18 13.5V19H5V6h5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </div>
-
-          <p id="description" class="description"></p>
-          <div id="stats" class="stats"></div>
-
-          <div class="divider"></div>
-
-          <fieldset class="quality-group">
-            <legend>Choose quality</legend>
-            <div id="qualities" class="qualities"></div>
-          </fieldset>
-
-          <button id="download" class="button primary wide" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <span>Download video</span>
-          </button>
-          <p class="privacy-note">
-            Processed on your server · files are deleted automatically
-          </p>
-        </div>
-      </section>
-
-      <section id="progress-panel" class="panel progress-panel" hidden aria-live="polite">
-        <span class="spinner" aria-hidden="true"></span>
-        <div class="progress-body">
-          <div class="progress-row">
-            <strong id="status-title">Preparing download…</strong>
-            <span id="status-percent"></span>
-          </div>
-          <p id="status-detail" class="progress-detail"></p>
-          <div id="progress-track" class="progress-track">
-            <span id="progress-bar" class="progress-bar"></span>
-          </div>
-        </div>
-        <button id="cancel" class="button ghost small" type="button">Cancel</button>
-      </section>
-
-      <section id="result-panel" class="panel result-panel" hidden aria-live="polite">
-        <span class="success-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="m5 12.5 4.4 4.4L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </span>
-        <div class="result-body">
-          <h2>Your reel is ready</h2>
-          <p id="result-meta" class="result-meta"></p>
-          <div class="result-actions">
-            <a id="save" class="button primary" href="#" download>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              Save MP4
-            </a>
-            <button id="again" class="button ghost" type="button">Download another</button>
-          </div>
-          <p id="expiry-note" class="expiry-note"></p>
-        </div>
-      </section>
-
-      <section id="error-panel" class="panel error-panel" hidden role="alert">
-        <span class="error-mark" aria-hidden="true">!</span>
-        <div class="error-body">
-          <strong id="error-title">Couldn’t load that reel</strong>
-          <p id="error-text"></p>
-          <button id="dismiss-error" class="button ghost small" type="button">Dismiss</button>
-        </div>
-      </section>
-
-      <section id="recent-section" class="recent" hidden>
-        <div class="recent-head">
-          <h2>Recent downloads</h2>
-          <button id="clear-recent" class="text-button" type="button">Clear</button>
-        </div>
-        <div id="recent-list" class="recent-list"></div>
-      </section>
-
-      <section class="panel faq" aria-label="Frequently asked questions">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-list">
-          <div class="faq-item">
-            <h3>How do you download video from Instagram?</h3>
-            <p>Copy the Instagram reel URL, paste it into the downloader, select a quality, and save the MP4.</p>
-          </div>
-          <div class="faq-item">
-            <h3>How can I download Instagram videos?</h3>
-            <p>Paste any public Instagram reel, video post, or IGTV link. The tool extracts the video and lets you download it as MP4.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Downloading videos on Instagram</h3>
-            <p>Public reels and video posts can be downloaded by pasting the link. Private reels are not supported.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Instagram video download 1080p HD</h3>
-            <p>Choose the best quality mode to download Instagram reels in the highest available resolution, up to 1080p HD.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Instagram reel downloader no watermark</h3>
-            <p>Reel Downloader saves Instagram reels as clean MP4 files with no watermark and no login required.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Download private instagram reel video</h3>
-            <p>Only public Instagram reels are supported. Private or restricted reels cannot be downloaded.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Snapinsta instagram reels downloader alternative</h3>
-            <p>Reel Downloader is a self-hosted, ad-free alternative to snapinsta for downloading Instagram reels.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Instagram reels mp3 downloader</h3>
-            <p>Reel Downloader extracts video as MP4. Audio is included in the downloaded MP4 file.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="steps" aria-label="How it works">
-        <div class="step">
-          <span class="step-number">01</span>
-          <h3>Paste the link</h3>
-          <p>Copy any reel, video post, or IGTV link from Instagram.</p>
-        </div>
-        <div class="step">
-          <span class="step-number">02</span>
-          <h3>Pick a quality</h3>
-          <p>Highest quality is converted to H.264 so it plays everywhere.</p>
-        </div>
-        <div class="step">
-          <span class="step-number">03</span>
-          <h3>Save the MP4</h3>
-          <p>No watermark, no login. The file is yours to keep.</p>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>
-        Only download content you own or have permission to use. This tool is not
-        affiliated with Instagram or Meta.
-      </p>
-      <p class="footer-links">
-        <a href="https://github.com/Shakeel5692/reel-downloader" target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="/api/health" target="_blank" rel="noopener noreferrer">Server status</a>
-        <span aria-hidden="true">·</span>
-        <a href="/privacy.html">Privacy</a>
-        <span aria-hidden="true">·</span>
-        <a href="/terms.html">Terms</a>
-        <span aria-hidden="true">·</span>
-        <a href="/contact.html">Contact</a>
-      </p>
-    </footer>
-
-    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-
-    <script src="/app.js" type="module"></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Reel Downloader",
+  "name": "Instagram Reel Downloader",
   "applicationCategory": "Utility",
-  "description": "Self-hosted Instagram reels downloader. Paste a public Instagram reel link and download it as MP4. No login required.",
+  "applicationSubCategory": "VideoDownloader",
+  "description": "Free Instagram video downloader. Download Instagram reels, videos, photos, IGTV, profile pictures and stories in HD and 4K quality. No login, no watermark, online and fast.",
   "url": "",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
-    }
-}
-</script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Reel Downloader",
-  "url": "",
-  "sameAs": [
-    "https://github.com/Shakeel5692/reel-downloader"
-  ],
-  "logo": "/favicon.svg"
-}
-</script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": ""
-    }
+  },
+  "featureList": [
+    "Download Instagram reels and videos",
+    "Download Instagram photos and images",
+    "Download Instagram profile pictures",
+    "HD and 4K quality download",
+    "No watermark",
+    "No login required",
+    "Free online downloader"
   ]
 }
 </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How do you download video from Instagram?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Copy the Instagram reel URL, paste it into the downloader, select a quality, and save the MP4."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I download Instagram videos?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Paste any public Instagram reel, video post, or IGTV link. The tool extracts the video and lets you download it as MP4."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Downloading videos on Instagram",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Public reels and video posts can be downloaded by pasting the link. Private reels are not supported."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Instagram video download 1080p HD",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Select the best quality mode to download Instagram reels in the highest available resolution, up to 1080p HD."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Instagram reel downloader no watermark",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Reel Downloader saves Instagram reels as clean MP4 files with no watermark and no login required."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Download private instagram reel video",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Only public Instagram reels are supported. Private or restricted reels cannot be downloaded."
-      }
-    }
-  ]
-}
-</script>
+  </head>
+  <body>
+    <div class="shell">
+      <!-- Compact Header -->
+      <header class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">
+            <img src="/logo.svg" width="28" height="28" alt="" />
+          </div>
+          <div class="brand-text">
+            <div class="name-title">Instagram Video Downloader</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Hero Section -->
+      <main class="wrap">
+        <section class="hero">
+          <div class="hero-inner">
+            <h1>
+              <span class="line1">Download Instagram</span>
+              <span class="line2">Reels &amp; Videos</span>
+            </h1>
+            <p class="lead">Paste an Instagram link and download your favorite reels and videos in high quality.</p>
+
+            <!-- Download Input -->
+            <form id="form" class="search-form" novalidate>
+              <div class="input-wrap">
+                <span class="link-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-.54-7.54l-4-4a5 5 0 0 0-7.04 7.04zM4 17l4-4M14 7l4 4" />
+                  </svg>
+                </span>
+                <input
+                  id="url"
+                  name="url"
+                  type="url"
+                  inputmode="url"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  placeholder="Paste Instagram reel URL here..."
+                  aria-label="Instagram reel link"
+                  required
+                />
+                <button id="fetch" class="button primary" type="submit">Download</button>
+              </div>
+            </form>
+
+            <!-- Bottom Indicators -->
+            <div class="indicators">
+              <div class="indicator">
+                <span class="ind-icon" aria-hidden="true">⚡</span>
+                <span class="ind-text">Fast Download</span>
+              </div>
+              <div class="ind-sep"></div>
+              <div class="indicator">
+                <span class="ind-icon" aria-hidden="true">🚫</span>
+                <span class="ind-text">No Watermark</span>
+              </div>
+              <div class="ind-sep"></div>
+              <div class="indicator">
+                <span class="ind-icon" aria-hidden="true">💯</span>
+                <span class="ind-text">100% Free</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Preview Section (hidden initially) -->
+        <section id="preview" class="card preview hidden" aria-live="polite">
+          <div class="card-body">
+            <div class="card-head">
+              <h2>Video Preview</h2>
+              <button id="reset" class="button ghost" type="button">Start Over</button>
+            </div>
+            <div class="preview-grid">
+              <div class="media-col">
+                <div class="thumb-wrap">
+                  <img id="thumb" class="thumb" alt="Video thumbnail" referrerpolicy="no-referrer" />
+                  <div id="thumb-fallback" class="thumb-fallback hidden">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8.5 6.5h7A2.5 2.5 0 0 1 18 9v7.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 16.5V9a2.5 2.5 0 0 1 2.5-2.5Zm0 0V4m4.75 7.6v4.3c0 .6.66.98 1.17.65l3.3-2.15a.78.78 0 0 0 0-1.3l-3.3-2.15a.78.78 0 0 0-1.17.65Z" fill="none" stroke="#7a7a8a" stroke-width="1.4" stroke-linecap="round" />
+                    </svg>
+                    <span>Thumbnail</span>
+                  </div>
+                  <div id="play-overlay" class="play-overlay" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="#ffffff">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <span id="duration" class="duration-badge" hidden></span>
+                </div>
+              </div>
+              <div class="info-col">
+                <div class="author-row">
+                  <span id="avatar" class="avatar">R</span>
+                  <div class="author-text">
+                    <strong id="author-name">Instagram Creator</strong>
+                    <span id="author-handle">@instagram</span>
+                  </div>
+                  <a id="original-link" class="nav-link small" target="_blank" rel="noopener noreferrer">Open on Instagram <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M18 13.5V19H5V6h5.5" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+                </div>
+                <p id="description" class="description"></p>
+                <fieldset class="quality-fieldset">
+                  <legend>Quality</legend>
+                  <div id="qualities" class="qualities"></div>
+                </fieldset>
+                <button id="download" class="button primary wide" type="button">Download Video</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress Section (hidden initially) -->
+        <section id="progress" class="card progress hidden" aria-live="polite">
+          <div class="card-body">
+            <div class="card-head">
+              <h2>Downloading</h2>
+              <button id="cancel" class="button ghost" type="button">Cancel</button>
+            </div>
+            <div class="progress-body">
+              <div class="progress-row">
+                <strong id="stage">Preparing your video&hellip;</strong>
+                <span id="percent"></span>
+              </div>
+              <p id="detail" class="detail"></p>
+              <div class="track">
+                <div id="bar" class="bar"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Result Section (hidden initially) -->
+        <section id="result" class="card result hidden" aria-live="polite">
+          <div class="card-body">
+            <div class="card-head">
+              <h2>Your video is ready</h2>
+              <button id="again" class="button ghost" type="button">Download Another</button>
+            </div>
+            <div class="result-body">
+              <div class="success-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </div>
+              <div class="result-content">
+                <p id="meta" class="meta"></p>
+                <div class="actions">
+                  <a id="save" class="button primary" href="#" download>Save MP4</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Error Section (hidden initially) -->
+        <section id="error" class="card error hidden" role="alert">
+          <div class="card-body">
+            <div class="card-head">
+              <h2>Error</h2>
+              <button id="error-dismiss" class="button ghost" type="button">Dismiss</button>
+            </div>
+            <div class="error-body">
+              <strong id="error-title"></strong>
+              <p id="error-message"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content" aria-label="About Instagram Reel Downloader">
+          <div class="seo-body">
+            <h2>Free Instagram Reel Downloader - Download Videos, Reels, Photos &amp; Profile Pictures</h2>
+            <p>
+              Looking for the best way to <strong>download video from Instagram</strong>? Our <strong>Instagram video downloader</strong>
+              lets you save reels, videos, photos, IGTV, stories and profile pictures in high quality. Whether you need an
+              <strong>Instagram reel downloader</strong>, <strong>Instagram photo downloader</strong>, or
+              <strong>Instagram image downloader</strong>, we have you covered. No login, no watermark, and completely free.
+            </p>
+            <p>
+              With our <strong>Instagram reels downloader</strong>, you can <strong>download reels</strong> in HD and even
+              <strong>4K quality</strong>. It works as an <strong>Instagram reel downloader online</strong> tool right in your
+              browser - just paste the link and save. We support <strong>Instagram reel downloader no watermark</strong>
+              downloads, so your videos stay clean and ready to share.
+            </p>
+            <p>
+              Need to <strong>download Instagram reels and videos</strong> quickly? Our tool handles
+              <strong>downloading videos on Instagram</strong> with ease. It's a <strong>free Instagram reel downloader</strong>
+              that works on mobile and desktop. From <strong>Instagram reels video downloader</strong> features to
+              <strong>Instagram profile picture downloader</strong> support, everything is built for speed and simplicity.
+            </p>
+            <p>
+              Want <strong>Instagram reel downloader 4k</strong> or <strong>HD without watermark</strong> output? We deliver
+              the best available quality. Use it as an <strong>Instagram reels downloader without watermark</strong> solution or
+              grab <strong>Instagram reel thumbnail downloader</strong> images. It's the <strong>Instagram reels downloader website</strong>
+              creators trust for fast, watermark-free downloads.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <p>© 2026 Instagram Reel Downloader. All rights reserved.</p>
+          <nav class="footer-nav">
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/copyright.html">Copyright</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/about.html">About</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="/app.js?v=2" type="module"></script>
     <script>
       (function () {
         var base = window.location.origin;
@@ -473,9 +276,6 @@
             var data = JSON.parse(el.textContent);
             if (data['@type'] === 'WebApplication' || data['@type'] === 'Organization') {
               data.url = base;
-            }
-            if (data['@type'] === 'BreadcrumbList' && data.itemListElement) {
-              data.itemListElement.forEach(function (item) { if (item.item === '') item.item = base; });
             }
             el.textContent = JSON.stringify(data);
           } catch (e) {}

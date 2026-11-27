@@ -3,84 +3,97 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#08080d" />
-    <meta name="description" content="About Reel Downloader — a self-hosted Instagram reel downloader. Learn how it works, quality modes, tech stack, and license." />
-    <meta property="og:title" content="About — Reel Downloader" />
-    <meta property="og:url" content="" />
+    <meta name="theme-color" content="#080812" />
+    <title>About - Instagram Reel Downloader</title>
+    <meta name="description" content="About Instagram Reel Downloader - free Instagram video, reels, photos and profile picture downloader. No login, no watermark, HD and 4K quality." />
+    <meta property="og:title" content="About - Instagram Reel Downloader" />
+    <meta property="og:description" content="About Instagram Reel Downloader - free Instagram video, reels, photos and profile picture downloader." />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="About Reel Downloader — a self-hosted Instagram reel downloader." />
-    <meta name="twitter:title" content="About — Reel Downloader" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:description" content="About Reel Downloader — a self-hosted Instagram reel downloader." />
-    <title>About — Reel Downloader</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="About - Instagram Reel Downloader" />
+    <meta name="twitter:description" content="About Instagram Reel Downloader." />
     <link rel="canonical" href="" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Reel Downloader home">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="3" width="18" height="18" rx="5.5" stroke="currentColor" stroke-width="1.7" />
-            <path d="M10.2 8.85v6.3c0 .62.68 1 1.2 .67l5.05-3.15a.8.8 0 0 0 0-1.34L11.4 8.18a.8.8 0 0 0-1.2 .67Z" fill="currentColor" />
-          </svg>
-        </span>
-        <span class="brand-text">Reel <span>Downloader</span></span>
-      </a>
-    </header>
-
-    <main>
-      <article class="panel" style="margin-top:30px;padding:24px;">
-        <h1>About Reel Downloader</h1>
-
-        <h2>What It Is</h2>
-        <p>Reel Downloader is a self-hosted Instagram reel downloader with a web UI and command-line interface. It lets you paste an Instagram reel link, pick a quality, and save a clean MP4 — no login, no watermark, no ads.</p>
-
-        <h2>How It Works</h2>
-        <p>The server uses <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> to extract metadata and streams from Instagram, and <a href="https://ffmpeg.org">FFmpeg</a> to merge and convert video to universally playable H.264 MP4. Downloads are processed on the server where the tool is hosted and streamed to your browser.</p>
-
-        <h2>Quality Modes</h2>
-        <ul>
-          <li><strong>Best:</strong> Highest quality, converted to H.264/AAC for maximum compatibility</li>
-          <li><strong>Original:</strong> Source stream remuxed without re-encoding (fastest)</li>
-          <li><strong>Data saver:</strong> Progressive MP4, smallest file size</li>
-        </ul>
-
-        <h2>Tech Stack</h2>
-        <ul>
-          <li>Node.js (stdlib only, no npm runtime dependencies)</li>
-          <li>yt-dlp (media extraction)</li>
-          <li>FFmpeg (merge / transcode / probe)</li>
-          <li>Vanilla HTML/CSS/JavaScript (no build step)</li>
-        </ul>
-
-        <h2>License</h2>
-        <p>MIT License. Copyright (c) 2026 Shakeel Ahmed.</p>
-
-        <h2>No Affiliation</h2>
-        <p>Reel Downloader is not affiliated with, endorsed by, or connected to Instagram, Meta Platforms, Inc., or any of their subsidiaries. Instagram is a trademark of Meta Platforms, Inc.</p>
-      </article>
-    </main>
-
-    <footer>
-      <p>
-        Only download content you own or have permission to use. This tool is not
-        affiliated with Instagram or Meta.
-      </p>
-      <p class="footer-links">
-        <a href="/">Home</a>
-        <span aria-hidden="true">·</span>
-        <a href="/privacy.html">Privacy Policy</a>
-        <span aria-hidden="true">·</span>
-        <a href="/terms.html">Terms of Service</a>
-      </p>
-    </footer>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">
+            <img src="/logo.svg" width="28" height="28" alt="" />
+          </div>
+          <div class="brand-text">
+            <div class="name-title">Instagram Reel Downloader</div>
+          </div>
+        </div>
+      </header>
+      <main class="wrap">
+        <section class="card">
+          <div class="card-body">
+            <h2>About Instagram Reel Downloader</h2>
+            <p>
+              Instagram Reel Downloader is a free, self-hosted tool that lets you download Instagram videos,
+              reels, photos, IGTV, stories, and profile pictures in high quality — including HD and 4K where
+              available. No login, no watermark, and no database. Everything you download stays private to
+              you.
+            </p>
+            <h3>Our Mission</h3>
+            <p>
+              We built Instagram Reel Downloader to give people a simple, fast, and private way to save
+              public Instagram content they own or have permission to use. We believe downloading should be
+              straightforward — no accounts, no watermarks, no hidden fees.
+            </p>
+            <h3>How It Works</h3>
+            <p>
+              Paste any Instagram link (reel, post, IGTV, story, or profile), pick a quality, and download.
+              Our server uses yt-dlp to extract the best available stream and FFmpeg to deliver a
+              universally playable MP4. Temporary files are deleted automatically after 30 minutes.
+            </p>
+            <h3>Features</h3>
+            <ul>
+              <li>Download Instagram reels, videos, photos, IGTV, stories, and profile pictures</li>
+              <li>HD and 4K quality where available</li>
+              <li>No login required</li>
+              <li>No watermark</li>
+              <li>Free to use</li>
+              <li>Works on mobile and desktop</li>
+              <li>CLI included for scriptable downloads</li>
+            </ul>
+            <h3>Not Affiliated With Instagram</h3>
+            <p>
+              Instagram Reel Downloader is an independent project and is not affiliated with, endorsed by,
+              or sponsored by Instagram or Meta Platforms, Inc. "Instagram" is a trademark of Meta
+              Platforms, Inc.
+            </p>
+            <h3>Legal</h3>
+            <p>
+              Please respect creators' rights. Only download content you own or have permission to use. See
+              our <a href="/terms.html">Terms of Service</a>,
+              <a href="/privacy.html">Privacy Policy</a>, and
+              <a href="/copyright.html">Copyright page</a> for more information.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <p>© 2026 Instagram Reel Downloader. All rights reserved.</p>
+          <nav class="footer-nav">
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/copyright.html">Copyright</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/about.html">About</a>
+          </nav>
+        </div>
+      </footer>
+    </div>
     <script>
       (function () {
         var base = window.location.origin;
-        document.querySelectorAll('meta[property="og:url"], meta[name="twitter:url"], link[rel="canonical"]').forEach(function (el) {
-          el.setAttribute(el.tagName === 'LINK' ? 'href' : 'content', base);
+        document.querySelectorAll('link[rel="canonical"]').forEach(function (el) {
+          el.setAttribute('href', base);
         });
       })();
     </script>

@@ -1,8 +1,8 @@
-# Reel Downloader
+# Instagram Reel Downloader - Download Instagram Videos, Reels &amp; Photos Free
 
 **Paste an Instagram reel link → pick a quality → save a clean MP4.**
 
-A self-hosted Instagram reel downloader with a polished web UI, a zero-dependency Node backend, and a CLI. It uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to extract the best available streams and FFmpeg to deliver a universally playable H.264 MP4.
+A self-hosted Instagram video downloader with a polished web UI, a zero-dependency Node backend, and a CLI. It uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to extract the best available streams and FFmpeg to deliver a universally playable H.264 MP4. Download Instagram reels, videos, photos, IGTV, profile pictures and stories in HD and 4K quality — no login, no watermark, 100% free.
 
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-3ddc97)](https://nodejs.org)
 [![License](https://img.shields.io/badge/license-MIT-f43f7f)](LICENSE)
@@ -14,8 +14,9 @@ A self-hosted Instagram reel downloader with a polished web UI, a zero-dependenc
 
 ## Features
 
-- **Highest available quality** — resolves the DASH streams Instagram serves, up to 1080×1920.
-- **Universal H.264 output** — VP9 sources are converted to H.264/AAC so the file plays on iPhone, Android, QuickTime, and every browser.
+- **Download video from Instagram** — reels, videos, IGTV, posts, stories, and profile pictures.
+- **Instagram video downloader** — resolves DASH streams Instagram serves, up to 1080×1920.
+- **Universal H.264 output** — VP9 sources converted to H.264/AAC so the file plays on iPhone, Android, QuickTime, and every browser.
 - **Three quality modes** — Best (H.264), Original (no re-encode, fastest), and Data saver (progressive MP4).
 - **Paste anything** — reel URLs, `/p/` posts, `/tv/` links, `instagram.com/share/...` links, mobile links, or a whole share message.
 - **Live progress + cancel** — server-side job queue, real progress, and one-click cancellation.

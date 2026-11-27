@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF2D78"/>
+      <stop offset="50%" stop-color="#8B35F6"/>
+      <stop offset="100%" stop-color="#FF914D"/>
+    </linearGradient>
+  </defs>
+  <!-- Video / Reels frame -->
+  <rect x="4" y="4" width="24" height="24" rx="7" fill="url(#logoGrad)"/>
+  <!-- Play button -->
+  <polygon points="12,12 20,16 12,20" fill="#ffffff"/>
+  <!-- Download arrow -->
+  <path d="M20 14.5l2 2 2-2M22 16.5v3.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.92"/>
+</svg>
